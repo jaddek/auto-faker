@@ -6,5 +6,4 @@ namespace Jaddek\AutoFaker;
 
 interface IReferenceAttribute
 {
-
 }

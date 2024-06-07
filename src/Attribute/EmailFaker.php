@@ -12,9 +12,7 @@ readonly class EmailFaker implements IFakerAttribute
     public function __construct(
         private string $domain = 'random-domain',
         private string $tld = '.cxyz',
-    )
-    {
-
+    ) {
     }
 
     public function __invoke(): string

@@ -19,20 +19,19 @@ readonly class ColumnSetterReflectionHandler
      * @throws Exception
      */
     public function getSetter(
-        ReflectionClass    $reflectionClass,
+        ReflectionClass $reflectionClass,
         ReflectionProperty $reflectionProperty
-    ): string
-    {
+    ): string {
         $setter = $this->getSetterName(
             $reflectionProperty->getName()
         );
 
         if ($reflectionClass->hasMethod($setter) === false) {
             throw new Exception(sprintf(
-                    'Setter %s was not found in class %s',
-                    $setter,
-                    $reflectionClass->getName())
-            );
+                'Setter %s was not found in class %s',
+                $setter,
+                $reflectionClass->getName()
+            ));
         }
 
         return $setter;
@@ -45,8 +44,7 @@ readonly class ColumnSetterReflectionHandler
      */
     public function getReflectionProperties(
         string $className
-    ): Generator
-    {
+    ): Generator {
         $reflectionClass = new ReflectionClass($className);
 
         foreach ($reflectionClass->getProperties() as $property) {

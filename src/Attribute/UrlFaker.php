@@ -10,12 +10,10 @@ use Jaddek\AutoFaker\IFakerAttribute;
 readonly class UrlFaker implements IFakerAttribute
 {
     public function __construct(
-        private bool   $secure = false,
+        private bool $secure = false,
         private string $domain = 'random-domain',
         private string $tld = '.cxyz',
-    )
-    {
-
+    ) {
     }
 
     public function __invoke(): string

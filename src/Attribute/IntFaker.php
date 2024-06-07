@@ -11,11 +11,10 @@ use Random\RandomException;
 readonly class IntFaker implements IFakerAttribute
 {
     public function __construct(
-        private int  $min = PHP_INT_MIN,
-        private int  $max = PHP_INT_MAX,
+        private int $min = PHP_INT_MIN,
+        private int $max = PHP_INT_MAX,
         private bool $positive = true
-    )
-    {
+    ) {
     }
 
     /**

@@ -11,10 +11,8 @@ class AutoFaker
         /**
          * @var array<\Closure>
          */
-        private array                   $middlewares = [],
-    )
-    {
-
+        private array $middlewares = [],
+    ) {
     }
 
     /**
@@ -35,11 +33,10 @@ class AutoFaker
     /**
      */
     public function generate(
-        string   $className,
-        int      $entityCount,
+        string $className,
+        int $entityCount,
         \Closure $closure,
-    ): void
-    {
+    ): void {
         foreach ($this->getGenerator($className, $entityCount) as $num => $entity) {
             $closure($num, $entity);
         }
@@ -57,7 +54,7 @@ class AutoFaker
     public function getGenerator(string $className, int $entityCount): \Generator
     {
         $report = $this->builder->makeReport($className);
-        $proto  = new $className;
+        $proto  = new $className();
         foreach (self::xrange($entityCount) as $ignored) {
             $entity = clone $proto;
 

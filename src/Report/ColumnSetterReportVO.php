@@ -11,10 +11,8 @@ readonly class ColumnSetterReportVO implements IValueObject
 {
     public function __construct(
         private IFakerAttribute $faker,
-        private string          $setter,
-    )
-    {
-
+        private string $setter,
+    ) {
     }
 
 

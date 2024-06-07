@@ -11,9 +11,7 @@ readonly class StringFaker implements IFakerAttribute
 {
     public function __construct(
         private int $length = 255
-    )
-    {
-
+    ) {
     }
 
     public function __invoke(): string

@@ -13,9 +13,7 @@ readonly class ColumnSetterBuilder implements IReportFactory
 {
     public function __construct(
         private ColumnSetterReflectionHandler $handler,
-    )
-    {
-
+    ) {
     }
 
     /**
@@ -25,8 +23,7 @@ readonly class ColumnSetterBuilder implements IReportFactory
      */
     public function makeReport(
         string $className,
-    ): array
-    {
+    ): array {
         $generator = $this->handler->getReflectionProperties($className);
 
         foreach ($generator as $class => $property) {
@@ -50,10 +47,9 @@ readonly class ColumnSetterBuilder implements IReportFactory
      * @throws Exception
      */
     protected function getReportLine(
-        \ReflectionClass    $reflectionClass,
+        \ReflectionClass $reflectionClass,
         \ReflectionProperty $reflectionProperty,
-    ): ColumnSetterReportVO
-    {
+    ): ColumnSetterReportVO {
         $setter = $this->handler->getSetter($reflectionClass, $reflectionProperty);
 
         $attributes = $reflectionProperty->getAttributes(
