@@ -1,0 +1,21 @@
+{
+    "name": "jaddek/auto-faker",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Jaddek\\AutoFaker\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "tonynazarov",
+            "email": "tonynazarov@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpstan/phpstan": "^1.11",
+        "phpunit/phpunit": "^11.2"
+    }
+}
