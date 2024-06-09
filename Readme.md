@@ -2,8 +2,7 @@
 
 ---
 
-Automatic filling of objects with data and references. 
-For fast generation of fixtures.
+Automated population of items with information and links. Facilitating rapid creation of samples.
 
 ```php
 <?php
