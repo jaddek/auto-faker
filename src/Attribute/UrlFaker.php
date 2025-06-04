@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Jaddek\AutoFaker\Attribute;
 
-
 use Jaddek\AutoFaker\IFakerAttribute;
 use Psr\Log\InvalidArgumentException;
 use Random\RandomException;
@@ -30,11 +29,10 @@ final readonly class UrlFaker implements IFakerAttribute
      * @psalm-param non-empty-string $tld
      */
     public function __construct(
-        private bool   $secure = false,
+        private bool $secure = false,
         private string $domain = 'random',
         private string $tld = 'random',
-    )
-    {
+    ) {
         if (empty($this->domain)) {
             throw new \InvalidArgumentException('Domain cannot be empty.');
         }

@@ -33,8 +33,7 @@ readonly class EmailFaker implements IFakerAttribute
     public function __construct(
         private string $domain = self::DEFAULT_RANDOM_DOMAIN,
         private string $tld = self::DEFAULT_RANDOM_TLD,
-    )
-    {
+    ) {
         if (empty($this->domain)) {
             throw new InvalidArgumentException('Domain cannot be empty.');
         }

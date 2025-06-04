@@ -62,10 +62,9 @@ final readonly class ColumnSetterBuilder implements IReportFactory
      * @throws Exception
      */
     protected function buildReportLine(
-        ReflectionClass    $class,
+        ReflectionClass $class,
         ReflectionProperty $property,
-    ): ColumnSetterReportVO
-    {
+    ): ColumnSetterReportVO {
         $setter = $this->handler->getSetter($class, $property);
 
         $attributes = $property->getAttributes(

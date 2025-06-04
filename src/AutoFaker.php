@@ -19,9 +19,8 @@ final class AutoFaker
      */
     public function __construct(
         private readonly IReportFactory $builder,
-        private array                   $middlewares = [],
-    )
-    {
+        private array $middlewares = [],
+    ) {
         $this->setReferenceMiddlewares($middlewares);
     }
 
@@ -85,11 +84,10 @@ final class AutoFaker
      * @return void
      */
     public function generate(
-        string  $className,
-        int     $entityCount,
+        string $className,
+        int $entityCount,
         Closure $closure,
-    ): void
-    {
+    ): void {
         if (!class_exists($className)) {
             throw new InvalidArgumentException(sprintf('Class "%s" does not exist.', $className));
         }
