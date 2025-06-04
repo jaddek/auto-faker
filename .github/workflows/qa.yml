@@ -1,0 +1,48 @@
+name: PHP QA Matrix
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - 'feature/**'
+      - 'bugfix/**'
+      - 'release/**'
+      - 'hotfix/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version: ['8.1', '8.2', '8.3']
+
+    name: PHP QA (PHP ${{ matrix.php-version }})
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: composer:v2
+          extensions: mbstring, xml, ctype, iconv
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Run PHP_CodeSniffer (PSR12)
+        run: vendor/bin/phpcs --standard=PSR12 src
+
+      - name: Run PHPStan (level max)
+        run: vendor/bin/phpstan analyse src --level=max
+
+      - name: Run Psalm
+        run: vendor/bin/psalm

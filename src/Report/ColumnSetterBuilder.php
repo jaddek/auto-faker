@@ -8,27 +8,42 @@ use Jaddek\AutoFaker\Exception;
 use Jaddek\AutoFaker\IReportFactory;
 use Jaddek\AutoFaker\IFakerAttribute;
 use Jaddek\AutoFaker\IValueObject;
+use ReflectionClass;
+use ReflectionException;
+use ReflectionProperty;
+use ReflectionAttribute;
 
-readonly class ColumnSetterBuilder implements IReportFactory
+/**
+ * @psalm-api
+ */
+final readonly class ColumnSetterBuilder implements IReportFactory
 {
-    public function __construct(
-        private ColumnSetterReflectionHandler $handler,
-    ) {
+    /**
+     * @var ColumnSetterReflectionHandler
+     */
+    private ColumnSetterReflectionHandler $handler;
+
+    public function __construct(ColumnSetterReflectionHandler $handler)
+    {
+        $this->handler = $handler;
     }
 
     /**
      * @param class-string $className
-     * @return array|IValueObject[]
-     * @throws \ReflectionException
+     * @return list<IValueObject>
+     * @throws ReflectionException
      */
-    public function makeReport(
-        string $className,
-    ): array {
+    #[\Override]
+    public function makeReport(string $className): array
+    {
         $generator = $this->handler->getReflectionProperties($className);
+
+        /** @var list<IValueObject> $report */
+        $report = [];
 
         foreach ($generator as $class => $property) {
             try {
-                $report[] = $this->getReportLine(
+                $report[] = $this->buildReportLine(
                     $class,
                     $property,
                 );
@@ -37,32 +52,35 @@ readonly class ColumnSetterBuilder implements IReportFactory
             }
         }
 
-        return $report ?? [];
+        return $report;
     }
 
     /**
-     * @param \ReflectionClass<object> $reflectionClass
-     * @param \ReflectionProperty $reflectionProperty
+     * @param ReflectionClass<object> $class
+     * @param ReflectionProperty $property
      * @return ColumnSetterReportVO
      * @throws Exception
      */
-    protected function getReportLine(
-        \ReflectionClass $reflectionClass,
-        \ReflectionProperty $reflectionProperty,
-    ): ColumnSetterReportVO {
-        $setter = $this->handler->getSetter($reflectionClass, $reflectionProperty);
+    protected function buildReportLine(
+        ReflectionClass    $class,
+        ReflectionProperty $property,
+    ): ColumnSetterReportVO
+    {
+        $setter = $this->handler->getSetter($class, $property);
 
-        $attributes = $reflectionProperty->getAttributes(
+        $attributes = $property->getAttributes(
             IFakerAttribute::class,
-            \ReflectionAttribute::IS_INSTANCEOF
+            ReflectionAttribute::IS_INSTANCEOF
         );
 
         if (empty($attributes)) {
-            throw new Exception('Attributes not found.');
+            throw new Exception('No IFakerAttribute found on property ' . $property->getName());
         }
 
+        $attribute = $attributes[0]->newInstance();
+
         return new ColumnSetterReportVO(
-            $attributes[0]->newInstance(),
+            $attribute,
             $setter,
         );
     }

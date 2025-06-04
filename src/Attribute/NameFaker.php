@@ -6,6 +6,9 @@ namespace Jaddek\AutoFaker\Attribute;
 
 use Jaddek\AutoFaker\IFakerAttribute;
 
+/**
+ * @psalm-api
+ */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 class NameFaker implements IFakerAttribute
 {
@@ -13,22 +16,14 @@ class NameFaker implements IFakerAttribute
      * @var array<string>
      */
     private array $data = [
-        'Andrew',
-        'Jase',
-        'John',
-        'Matt',
-        'Anton',
-        'Tom',
-        'Benjamin',
-        'Alice',
-        'Mavis',
-        'Valentina',
-        'Julia',
-        'Alicia',
-        'Karen',
-        'Ksenia'
+        "Oliver", "Charlotte", "Liam", "Amelia", "Noah", "Isla",
+        "Elijah", "Ava", "James", "Sophia", "Lucas", "Mia",
+        "William", "Harper", "Benjamin", "Luna", "Henry", "Ella",
+        "Theodore", "Grace", "Jack", "Chloe", "Leo", "Zoe",
+        "Thomas", "Evie", "Alexander", "Willow", "Harrison", "Ivy"
     ];
 
+    #[\Override]
     public function __invoke(): string
     {
         return array_rand(array_flip($this->data));

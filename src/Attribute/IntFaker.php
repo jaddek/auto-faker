@@ -7,6 +7,9 @@ namespace Jaddek\AutoFaker\Attribute;
 use Jaddek\AutoFaker\IFakerAttribute;
 use Random\RandomException;
 
+/**
+ * @psalm-api
+ */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 readonly class IntFaker implements IFakerAttribute
 {
@@ -20,6 +23,7 @@ readonly class IntFaker implements IFakerAttribute
     /**
      * @throws RandomException
      */
+    #[\Override]
     public function __invoke(): int
     {
         return random_int($this->positive ? 0 : $this->min, $this->max);

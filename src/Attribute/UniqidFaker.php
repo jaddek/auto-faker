@@ -6,9 +6,13 @@ namespace Jaddek\AutoFaker\Attribute;
 
 use Jaddek\AutoFaker\IFakerAttribute;
 
+/**
+ * @psalm-api
+ */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-readonly class UniqidFaker implements IFakerAttribute
+final readonly class UniqidFaker implements IFakerAttribute
 {
+    #[\Override]
     public function __invoke(): string
     {
         return uniqid();

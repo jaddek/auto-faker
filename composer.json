@@ -9,15 +9,19 @@
     },
     "authors": [
         {
-            "name": "tonynazarov",
-            "email": "tonynazarov@gmail.com"
+            "name": "Anton Nazarov",
+            "email": "anton.nazarov.anz@gmail.com"
         }
     ],
+    "require": {
+        "php": ">=8.1"
+    },
     "minimum-stability": "stable",
     "require-dev": {
         "phpstan/phpstan": "^1.11",
         "phpunit/phpunit": "^11.2",
         "fabpot/php-cs-fixer": "^3.58",
-        "squizlabs/php_codesniffer": "*"
+        "squizlabs/php_codesniffer": "*",
+        "vimeo/psalm": "^6.12"
     }
 }
