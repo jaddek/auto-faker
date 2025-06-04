@@ -74,10 +74,6 @@ readonly class EmailFaker implements IFakerAttribute
      */
     private function generateRandomString(int $length = self::DEFAULT_LENGTH): string
     {
-        /** @psalm-suppress DocblockTypeContradiction */
-        if ($length <= 0) {
-            throw new \InvalidArgumentException('Length must be a positive integer.');
-        }
         $randomString = '';
         $charactersLength = strlen(self::RANDOM_CHARS);
 

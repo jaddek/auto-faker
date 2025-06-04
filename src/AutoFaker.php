@@ -30,29 +30,6 @@ final class AutoFaker
      */
     public function setReferenceMiddlewares(array $middlewares): void
     {
-        foreach ($middlewares as $key => $middleware) {
-            /** @psalm-suppress DocblockTypeContradiction */
-            if (!\is_string($key) || !\is_subclass_of($key, IReferenceAttribute::class)) {
-                throw new InvalidArgumentException(
-                    sprintf(
-                        'Middleware key "%s" must be a class-string of type %s.',
-                        $key,
-                        IReferenceAttribute::class
-                    )
-                );
-            }
-
-            /** @psalm-suppress DocblockTypeContradiction */
-            if (!$middleware instanceof Closure) {
-                throw new InvalidArgumentException(
-                    sprintf(
-                        'Middleware for "%s" must be an instance of \Closure, %s given.',
-                        $key,
-                        get_debug_type($middleware)
-                    )
-                );
-            }
-        }
         $this->middlewares = $middlewares;
     }
 
@@ -151,7 +128,6 @@ final class AutoFaker
      */
     protected function invokeFaker(IValueObject $object, object $entity): void
     {
-        /** @var Closure(): mixed $faker */
         $faker = $object->getFaker();
         $value = $faker();
 
