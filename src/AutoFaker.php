@@ -157,7 +157,7 @@ final class AutoFaker
 
         if ($faker instanceof IReferenceAttribute) {
             /** @var class-string<IReferenceAttribute> $fakerClass */
-            $fakerClass = $faker::class; // Assuming $faker itself will be an instance of IReferenceAttribute if it needs special handling.
+            $fakerClass = $faker::class;
 
             $closure = $this->middlewares[$fakerClass] ?? null;
 

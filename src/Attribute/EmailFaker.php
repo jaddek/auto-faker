@@ -53,7 +53,9 @@ readonly class EmailFaker implements IFakerAttribute
         $localPart = $this->generateRandomString(8) . '.' . $this->generateRandomString(5);
 
         $resolvedDomain = $this->domain === self::DEFAULT_RANDOM_DOMAIN ? $this->generateRandomString() : $this->domain;
-        $resolvedTld = $this->tld === self::DEFAULT_RANDOM_TLD ? self::DEFAULT_TLDS[array_rand(self::DEFAULT_TLDS)] : $this->tld;
+        $resolvedTld = $this->tld === self::DEFAULT_RANDOM_TLD
+            ? self::DEFAULT_TLDS[array_rand(self::DEFAULT_TLDS)]
+            : $this->tld;
 
         if ($resolvedTld !== self::DEFAULT_RANDOM_TLD && !str_starts_with($resolvedTld, '.')) {
             $resolvedTld = '.' . $resolvedTld;
